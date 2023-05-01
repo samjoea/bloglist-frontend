@@ -13,7 +13,7 @@ const LoginForm = ({ handleLogin, handleChange }) => {
 				<div>
           password: <input type="password" name="password" onChange={(e) => handleChange(e, inputData.current)} />
 				</div>
-				<button type="submit">login</button>
+				<button data-cy='login-submit' type="submit">login</button>
 			</form>
 		</div>
 	);

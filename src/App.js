@@ -45,14 +45,12 @@ const App = () => {
 		else{
 			setMessageData({ message: response?.data, type: 'error' });
 		}
-		console.log('response', response);
 	};
 
 	const handleAddBlog = async (event, blogData) => {
 		event.preventDefault();
 		setMessageData({ message: '', type: '' });
 		const response = await addNewBlog(blogData);
-		console.log('Blog added', response);
 		if(response.status === 201) {
 			setNewBlog(response?.data);
 			setMessageData({ message: `a new blog ${response?.data?.title} was added`, type: 'success' });
@@ -98,11 +96,9 @@ const App = () => {
 			<div>
 				<div>Log in to application</div>
 				<Notification messageData={messageData} />
-				<Togglable ref={componentRef} buttonLable='login' >
-					<LoginForm
-						handleLogin={handleLogin}
-						handleChange={handleChange} />
-				</Togglable>
+				<LoginForm
+					handleLogin={handleLogin}
+					handleChange={handleChange} />
 			</div>
 		);
 	}
@@ -113,7 +109,7 @@ const App = () => {
 			<Notification messageData={messageData} />
 			<div>
 				{user?.name || getUser?.name} logged in
-				<button onClick={logOut} >logout</button>
+				<button data-cy='log-out' onClick={logOut} >logout</button>
 			</div>
 			<br />
 			<div>
@@ -123,15 +119,17 @@ const App = () => {
 						handleChange={handleChange} />
 				</Togglable>
 			</div>
-			{blogs?.sort((blog1, blog2) => blog2.likes - blog1.likes)?.map(blog =>
-				<Blog
-					key={blog.id}
-					blog={blog}
-					addLikes={addLikes}
-					userName={getUser?.username}
-					deleteBlog={deleteBlog}
-				/>
-			)}
+			<div data-cy='blog-posts'>
+				{blogs?.sort((blog1, blog2) => blog2.likes - blog1.likes)?.map(blog =>
+					<Blog
+						key={blog.id}
+						blog={blog}
+						addLikes={addLikes}
+						userName={getUser?.username}
+						deleteBlog={deleteBlog}
+					/>
+				)}
+			</div>
 		</div>
 	);
 };

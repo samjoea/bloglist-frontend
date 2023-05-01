@@ -22,7 +22,6 @@ const getAll = async () => {
 const addNewBlog = async (blog) => {
 	try {
 		const response = await blogApi.post('/',blog);
-		console.log(response);
 		return {
 			status: response?.status,
 			data: response?.data

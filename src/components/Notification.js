@@ -24,7 +24,7 @@ const Notification = ({ messageData }) => {
 	return display ? (
 		<div>
 			<br />
-			<div style={{
+			<div data-cy='notification-box' style={{
 				color: typeColor[type],
 				fontSize: '20px',
 				paddingTop: '8px',
